@@ -6,9 +6,14 @@ public enum TipoProdutoEnum {
     MERCEARIA("Mercearia"),
     HIGIENE("Higiene");
 
-    public String tipoProduto;
+    private String descricao;
 
     TipoProdutoEnum(String descricao) {
-        tipoProduto = descricao;
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+
+        return descricao;
     }
 }

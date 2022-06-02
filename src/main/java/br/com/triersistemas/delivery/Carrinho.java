@@ -7,34 +7,73 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 @Getter
 @Setter
 public class Carrinho {
 
-    private List<Produto> produto;
-    private Integer quantidade;
+    private List<Produto> produtoListagem = new ArrayList<>();
+    //private Produto produto;
     private BigDecimal total;
 
     public Carrinho() {
 
     }
 
-    public Carrinho(List<Produto> produto, Integer quantidade, BigDecimal total) {
-        this.produto = produto;
-        this.quantidade = quantidade;
+    public Carrinho(List<Produto> produto, BigDecimal total) {
+
+        this.produtoListagem = produto;
         this.total = total;
     }
 
+    public Carrinho produtoList(){
+        produtoListagem.add(Produto.produtosCadastrado.get(0));
+        produtoListagem.add(Produto.produtosCadastrado.get(3));
+        return null; //AJUSTE
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public BigDecimal somaProdutos(List<Produto> listProdutos) {
+
+        if (Objects.isNull(listProdutos)) {
+
+            for (int i = 0; i < listProdutos.size(); i++) {
+                total = total.add(produtoListagem.get(i).getPreco());
+            }
+        } else {
+            total = BigDecimal.ZERO;
+
+        }
+
+
+        return total;
+    }
+
+
+
+
     @Override
     public String toString() {
-
-        //   return "Produto: " + produto.get(0).getNome() + "\nQuantidade: " + (quantidade = produto.size()) + "\nTotal: " + total;
         var df = new DecimalFormat("0.00");
 
-        //produto.stream().map(p -> "\nProduto: " + p.getNome() + "\nPreço: " +  df.format(p.getPreco())  + "\nQuantidade: " + quantidade + "\nCategoria: " + p.getTipo()).forEach(System.out::println);
-        return "";
+        var sB = new StringBuilder();
+        for (int i = 0; i < produtoListagem.size(); i++) {
+            sB.append("\nNome: ").append(produtoListagem.get(i).getNome());
+            sB.append("\nNome: ").append(df.format(produtoListagem.get(i).getPreco()));
+            sB.append("\nQuantidade: ").append(produtoListagem.get(i).getQuantidadeProdutos());
+            sB.append("\nCategoria: ").append(produtoListagem.get(i).getTipo().getDescricao());
+            sB.append("\n");
+        }
+
+        return sB.toString();
 
 
     }

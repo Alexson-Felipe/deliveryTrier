@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class App {
     static Scanner sc = new Scanner(System.in);
@@ -14,17 +13,14 @@ public class App {
 
     public static void main(String[] args) {
         Endereco enderecoTest = new Endereco("Rua admin", "sn", "centro", "Cidade Teste");
-        new Produto();
-        listaProdutos.add(Produto.produtosCadastrado.get(0));
-        listaProdutos.add(Produto.produtosCadastrado.get(3));
+        //new Produto();
 
+        //listaProdutos.add(Produto.produtosCadastrado.get(0));
+        //listaProdutos.add(Produto.produtosCadastrado.get(3));
 
-        Carrinho carrinho = new Carrinho(listaProdutos, 0, BigDecimal.valueOf(0.00));
-        clientes.add(new Cliente("admin", "1234", "admin", enderecoTest, carrinho));
+        Carrinho carrinho = new Carrinho(new Produto().criarlistarProdutos(), BigDecimal.valueOf(0.00));
+        clientes.add(new Cliente("admin", "1234", "admin", enderecoTest, carrinho.produtoList()));
 
-        for (Produto p : listaProdutos) {
-            System.out.println(p);
-        }
 
         loginOuCriarConta();
 
@@ -68,13 +64,12 @@ public class App {
         System.out.print("Digite a senha: ");
         String senha = sc.next();
 
-        for (Cliente cl : clientes) {
-
-        }
-
         for (int i = 0; i < clientes.size(); i++) {
-            if (clientes.get(i).getNome().equals(nomeOuCpf) || clientes.get(i).getCpf().equals(nomeOuCpf)) {
-                menuPrincipal(clientes.get(i).getNome(), clientes.get(i).getCarrinho().getTotal(), clientes.get(i).getCpf());
+            System.out.println();
+            if ((clientes.get(i).getNome().equals(nomeOuCpf) || clientes.get(i).getCpf().equals(nomeOuCpf)) && clientes.get(i).getSenha().equals(senha)) {
+                menuPrincipal(clientes.get(i).getNome(), clientes.get(i).getCarrinho().somaProdutos(listaProdutos), clientes.get(i).getCpf());
+            }else{
+                System.out.println("\n!!!!SENHA INVALIDA!!!!");
             }
 
         }
@@ -95,7 +90,7 @@ public class App {
             digito = sc.nextInt();
 
             if (digito == 1) {
-
+                comprarProduto();
             } else if (digito == 2) {
                 carrinhoDeCompras(cpf);
             } else if (digito == 3) {
@@ -109,12 +104,16 @@ public class App {
     }
 
     public static void carrinhoDeCompras(String cpf) {
+        boolean verificador = true;
 
         for (Cliente cliente : clientes) {
-            if (cliente.getCarrinho().getProduto() == null) {
-                System.out.println("\n!!!!CARRINHO VAZIO!!!!");
-            } else {
+            if (cliente.getCarrinho().getProduto() != null && cliente.getCpf().equals(cpf)) {
                 System.out.println(cliente.getCarrinho());
+                verificador = false;
+
+            } else if (verificador && cliente.getCarrinho().getProduto() == null) {
+                System.out.println("\n!!!!CARRINHO VAZIO!!!!");
+                verificador = false;
             }
         }
 
@@ -123,9 +122,13 @@ public class App {
 
     public static void listarProdutos() {
 
-        for (Produto produto : Produto.produtos) {
-            System.out.println(produto);
+        for (Produto produto : Produto.produtosCadastrado) {
+            System.out.println("\n"+ produto);
         }
+
+    }
+
+    public static void comprarProduto() {
 
     }
 

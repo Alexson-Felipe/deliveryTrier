@@ -6,6 +6,8 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -18,8 +20,17 @@ public class Cliente {
     private String cpf;
     private String senha;
     private Endereco endereco;
+    private List<Produto> produto = new ArrayList<>();
     private Carrinho carrinho;
 
+    public Cliente(String nome, String cpf, String senha, Endereco endereco, List<Produto> produto, Carrinho carrinho) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.senha = senha;
+        this.endereco = endereco;
+        this.produto = produto;
+        this.carrinho = carrinho;
+    }
 
     public Cliente(String nome, String cpf, String senha, Endereco endereco) {
         this.nome = nome;
@@ -36,6 +47,8 @@ public class Cliente {
         this.carrinho = carrinho;
     }
 
+
+
     public static Cliente cadastraCliente(){
         Scanner sc = new Scanner(System.in);
         System.out.println("__________________________");
@@ -48,7 +61,7 @@ public class Cliente {
         System.out.print("Digite uma Senha: ");
         var senha = sc.nextLine();
         System.out.println();
-        Carrinho carrinhoCliente = new Carrinho(null, 0, BigDecimal.valueOf(0.00));
+        Carrinho carrinhoCliente = new Carrinho(null, BigDecimal.valueOf(0.00));
 
 
         Endereco end = Endereco.cadastraEndereco();
