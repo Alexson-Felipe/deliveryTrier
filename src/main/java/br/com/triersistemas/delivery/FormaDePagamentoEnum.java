@@ -1,6 +1,6 @@
 package br.com.triersistemas.delivery;
 
-public enum FormaDePagamento {
+public enum FormaDePagamentoEnum {
 
     CREDITO,
     DEBITO,
