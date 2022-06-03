@@ -185,6 +185,7 @@ public class App {
 
         for (int i = 0; i < 13 - nome.length(); i++) {
             espaco.append(" ");
+
         }
 
         System.out.print("\n__________________________");
