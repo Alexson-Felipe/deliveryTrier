@@ -14,24 +14,26 @@ import java.util.Objects;
 public class Carrinho {
 
     private List<Produto> produtoListagem = new ArrayList<>();
-    //private Produto produto;
+
     private BigDecimal total;
 
     public Carrinho() {
 
     }
 
-    public Carrinho(List<Produto> produto, BigDecimal total) {
+    public Carrinho(List<Produto> produto) {
+        this.produtoListagem = produto;
+    }
 
+    public Carrinho(List<Produto> produto, BigDecimal total) {
         this.produtoListagem = produto;
         this.total = total;
     }
 
-    public Carrinho produtoList(){
-        produtoListagem.add(Produto.produtosCadastrado.get(0));
-        produtoListagem.add(Produto.produtosCadastrado.get(3));
-        return null; //AJUSTE
+    public Carrinho( BigDecimal total) {
+        this.total = total;
     }
+
 
     public BigDecimal getTotal() {
         return total;
@@ -43,7 +45,7 @@ public class Carrinho {
 
     public BigDecimal somaProdutos(List<Produto> listProdutos) {
 
-        if (Objects.isNull(listProdutos)) {
+        if (!Objects.isNull(listProdutos)) {
 
             for (int i = 0; i < listProdutos.size(); i++) {
                 total = total.add(produtoListagem.get(i).getPreco());

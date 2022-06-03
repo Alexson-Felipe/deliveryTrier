@@ -2,54 +2,56 @@ package br.com.triersistemas.delivery;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 
 @Getter
+@Setter
 @ToString
 public class Cliente {
-
 
     private String nome;
     private String cpf;
     private String senha;
-    private Endereco endereco;
     private List<Produto> produto = new ArrayList<>();
     private Carrinho carrinho;
 
-    public Cliente(String nome, String cpf, String senha, Endereco endereco, List<Produto> produto, Carrinho carrinho) {
+    public Cliente() {
+
+    }
+
+    public Cliente(String nome, String cpf, String senha, List<Produto> produto, Carrinho carrinho) {
         this.nome = nome;
         this.cpf = cpf;
         this.senha = senha;
-        this.endereco = endereco;
         this.produto = produto;
         this.carrinho = carrinho;
     }
 
-    public Cliente(String nome, String cpf, String senha, Endereco endereco) {
+    public Cliente(String nome, String cpf, String senha) {
         this.nome = nome;
         this.cpf = cpf;
         this.senha = senha;
-        this.endereco = endereco;
     }
 
-    public Cliente(String nome, String cpf, String senha, Endereco endereco, Carrinho carrinho) {
+    public Cliente(String nome, String cpf, String senha, Carrinho carrinho) {
         this.nome = nome;
         this.cpf = cpf;
         this.senha = senha;
-        this.endereco = endereco;
         this.carrinho = carrinho;
     }
 
+    public static Cliente cadastraCliente() {
+        boolean controlador = false;
 
-
-    public static Cliente cadastraCliente(){
         Scanner sc = new Scanner(System.in);
         System.out.println("__________________________");
         System.out.println("    CADASTRAR CLIENTE     ");
@@ -58,16 +60,17 @@ public class Cliente {
         var nome = sc.nextLine();
         System.out.print("Digite CPF: ");
         var cpf = sc.nextLine();
+
         System.out.print("Digite uma Senha: ");
         var senha = sc.nextLine();
+
         System.out.println();
-        Carrinho carrinhoCliente = new Carrinho(null, BigDecimal.valueOf(0.00));
-
-
-        Endereco end = Endereco.cadastraEndereco();
+        Carrinho carrinhoCliente = new Carrinho(BigDecimal.ZERO);
 
         System.out.println("\n****CLIENTE CADASTRADO****\n");
-        return new Cliente(nome, cpf, senha, end, carrinhoCliente);
+
+        return new Cliente(nome, cpf, senha, carrinhoCliente);
     }
+
 
 }
