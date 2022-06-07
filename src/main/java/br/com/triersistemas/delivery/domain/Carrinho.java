@@ -1,4 +1,4 @@
-package br.com.triersistemas.delivery;
+package br.com.triersistemas.delivery.domain;
 
 import lombok.Getter;
 import lombok.Setter;

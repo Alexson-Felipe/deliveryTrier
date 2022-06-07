@@ -1,5 +1,9 @@
 package br.com.triersistemas.delivery;
 
+import br.com.triersistemas.delivery.domain.Carrinho;
+import br.com.triersistemas.delivery.domain.Cliente;
+import br.com.triersistemas.delivery.domain.Produto;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
