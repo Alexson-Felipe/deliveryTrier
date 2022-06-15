@@ -18,28 +18,34 @@ public class Cliente {
     private String nome;
     private String cpf;
     private String senha;
-    private List<Produto> produto = new ArrayList<>();
+    private List<Produto> produto;
     private Carrinho carrinho;
 
     public Cliente() {
 
     }
 
+    public Cliente(String nome, String cpf, String senha) {
+        this();
+        this.nome = nome;
+        this.cpf = cpf;
+        this.senha = senha;
+    }
+
     public Cliente(String nome, String cpf, String senha, List<Produto> produto, Carrinho carrinho) {
+        this();
         this.nome = nome;
         this.cpf = cpf;
         this.senha = senha;
         this.produto = produto;
         this.carrinho = carrinho;
+
     }
 
-    public Cliente(String nome, String cpf, String senha) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.senha = senha;
-    }
+
 
     public Cliente(String nome, String cpf, String senha, Carrinho carrinho) {
+        this();
         this.nome = nome;
         this.cpf = cpf;
         this.senha = senha;

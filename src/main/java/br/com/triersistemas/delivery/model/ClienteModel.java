@@ -1,19 +1,25 @@
 package br.com.triersistemas.delivery.model;
 
-import br.com.triersistemas.delivery.domain.Carrinho;
-import br.com.triersistemas.delivery.domain.Produto;
 import lombok.Getter;
+import org.hibernate.validator.constraints.br.CPF;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 public class ClienteModel {
 
+    @NotNull
+    @NotBlank
     private String nome;
+
+    @CPF
+    @NotNull
     private String cpf;
+
+    @NotNull
+    @NotBlank
     private String senha;
-    //private List<Produto> produto = new ArrayList<>();
-    private Carrinho carrinho;
+
 
 }

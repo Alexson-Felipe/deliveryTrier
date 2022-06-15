@@ -23,6 +23,7 @@ public class Carrinho {
 
     public Carrinho(List<Produto> produto) {
         this.produtoListagem = produto;
+        this.total = BigDecimal.ZERO;
     }
 
     public Carrinho(List<Produto> produto, BigDecimal total) {
