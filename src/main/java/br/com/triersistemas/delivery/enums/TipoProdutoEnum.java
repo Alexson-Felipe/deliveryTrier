@@ -1,4 +1,4 @@
-package br.com.triersistemas.delivery.enuns;
+package br.com.triersistemas.delivery.enums;
 
 public enum TipoProdutoEnum {
 

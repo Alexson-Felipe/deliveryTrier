@@ -1,2 +1,5 @@
-package br.com.triersistemas.delivery.repository;public interface ClienteRepository {
+package br.com.triersistemas.delivery.repository;
+
+public interface ClienteRepository {
+
 }
