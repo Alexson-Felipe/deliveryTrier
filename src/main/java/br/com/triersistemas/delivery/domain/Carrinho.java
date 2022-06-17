@@ -10,12 +10,13 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-@Setter
 public class Carrinho {
 
     private List<Produto> produtoListagem = new ArrayList<>();
 
+    private List<Produto> produto;
     private BigDecimal total;
+
 
     public Carrinho() {
 
@@ -71,7 +72,6 @@ public class Carrinho {
         for (int i = 0; i < produtoListagem.size(); i++) {
             sB.append("\nNome: ").append(produtoListagem.get(i).getNome());
             sB.append("\nNome: ").append(df.format(produtoListagem.get(i).getPreco()));
-            sB.append("\nQuantidade: ").append(produtoListagem.get(i).getQuantidadeProdutos());
             sB.append("\nCategoria: ").append(produtoListagem.get(i).getTipo().getDescricao());
             sB.append("\n");
         }

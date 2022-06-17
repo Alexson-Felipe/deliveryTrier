@@ -22,8 +22,6 @@ public class Produto {
 
    public static List<Produto> produtosCadastrado;
 
-
-
     public Produto(String nome, BigDecimal preco, TipoProdutoEnum tipo) {
         this.id = UUID.randomUUID();
         this.nome = nome;
@@ -31,7 +29,12 @@ public class Produto {
         this.tipo = tipo;
     }
 
-
+    public Produto editar(String nome, BigDecimal preco, TipoProdutoEnum tipo){
+        this.nome = nome;
+        this.preco = preco;
+        this.tipo = tipo;
+        return this;
+    }
 
     @Override
     public String toString() {
