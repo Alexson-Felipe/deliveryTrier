@@ -8,27 +8,29 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 public class Carrinho {
 
-    private List<Produto> produtoListagem = new ArrayList<>();
-
+    private UUID id;
     private List<Produto> produto;
     private BigDecimal total;
 
 
     public Carrinho() {
-
+        this.id = UUID.randomUUID();
     }
 
     public Carrinho(List<Produto> produto) {
-        this.produtoListagem = produto;
+        this();
+        this.produto = produto;
         this.total = BigDecimal.ZERO;
     }
 
     public Carrinho(List<Produto> produto, BigDecimal total) {
-        this.produtoListagem = produto;
+        this();
+        this.produto = produto;
         this.total = total;
     }
 
@@ -49,15 +51,13 @@ public class Carrinho {
 
         if (!Objects.isNull(listProdutos)) {
 
-            for (int i = 0; i < listProdutos.size(); i++) {
-                total = total.add(produtoListagem.get(i).getPreco());
+            for (int i = 0; i < produto.size(); i++) {
+                total = total.add(produto.get(i).getPreco());
             }
         } else {
             total = BigDecimal.ZERO;
 
         }
-
-
         return total;
     }
 
@@ -69,10 +69,10 @@ public class Carrinho {
         var df = new DecimalFormat("0.00");
 
         var sB = new StringBuilder();
-        for (int i = 0; i < produtoListagem.size(); i++) {
-            sB.append("\nNome: ").append(produtoListagem.get(i).getNome());
-            sB.append("\nNome: ").append(df.format(produtoListagem.get(i).getPreco()));
-            sB.append("\nCategoria: ").append(produtoListagem.get(i).getTipo().getDescricao());
+        for (int i = 0; i < produto.size(); i++) {
+            sB.append("\nNome: ").append(produto.get(i).getNome());
+            sB.append("\nNome: ").append(df.format(produto.get(i).getPreco()));
+            sB.append("\nCategoria: ").append(produto.get(i).getTipo().getDescricao());
             sB.append("\n");
         }
 

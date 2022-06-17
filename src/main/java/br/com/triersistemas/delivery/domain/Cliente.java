@@ -16,10 +16,11 @@ public class Cliente {
     private Carrinho carrinho;
 
     public Cliente() {
-
+        carrinho = new Carrinho();
     }
 
     public Cliente(String nome, String cpf, String senha) {
+        this();
         this.id = UUID.randomUUID();
         this.nome = nome;
         this.cpf = cpf;
@@ -33,6 +34,12 @@ public class Cliente {
         this.senha = senha;
         this.carrinho = carrinho;
 
+    }
+
+    public Cliente editar(String nome, String senha){
+        this.nome = nome;
+        this.senha = senha;
+        return this;
     }
 
 }

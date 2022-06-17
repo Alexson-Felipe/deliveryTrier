@@ -4,12 +4,13 @@ import br.com.triersistemas.delivery.domain.Cliente;
 import br.com.triersistemas.delivery.domain.Produto;
 import br.com.triersistemas.delivery.repository.ClienteRepository;
 import br.com.triersistemas.delivery.repository.ProdutoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@Repository
 public class ProdutoRepositoryImpl implements ProdutoRepository {
 
     private static final List<Produto> LIST = new ArrayList<>();

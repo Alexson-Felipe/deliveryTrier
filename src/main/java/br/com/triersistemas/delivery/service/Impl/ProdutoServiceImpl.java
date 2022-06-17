@@ -10,10 +10,11 @@ import br.com.triersistemas.delivery.repository.ProdutoRepository;
 import br.com.triersistemas.delivery.service.ClienteService;
 import br.com.triersistemas.delivery.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-
+@Service
 public class ProdutoServiceImpl implements ProdutoService {
 
     @Autowired
