@@ -1,22 +1,21 @@
 package br.com.triersistemas.delivery.model;
 
-import br.com.triersistemas.delivery.enums.TipoProdutoEnum;
 import lombok.Getter;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 
 @Getter
-public class ProdutoModel {
+public class AlterarClienteModel {
 
     @NotNull
     @NotBlank
     private String nome;
 
     @NotNull
-    private BigDecimal preco;
+    @NotBlank
+    private String senha;
 
-    @NotNull
-    private TipoProdutoEnum tipo;
+
 }

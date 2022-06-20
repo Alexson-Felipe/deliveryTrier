@@ -2,6 +2,7 @@ package br.com.triersistemas.delivery.service.Impl;
 
 import br.com.triersistemas.delivery.domain.Cliente;
 import br.com.triersistemas.delivery.exceptions.NaoExisteException;
+import br.com.triersistemas.delivery.model.AlterarClienteModel;
 import br.com.triersistemas.delivery.model.ClienteModel;
 import br.com.triersistemas.delivery.repository.ClienteRepository;
 import br.com.triersistemas.delivery.service.ClienteService;
@@ -33,9 +34,9 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Cliente alterar(UUID id, ClienteModel model) {
+    public Cliente alterar(UUID id, AlterarClienteModel model) {
         var cliente = this.consultar(id);
-        clienteRepository.cadastrar(cliente);
+        cliente.editar(model.getNome(), model.getSenha());
         return cliente;
     }
 

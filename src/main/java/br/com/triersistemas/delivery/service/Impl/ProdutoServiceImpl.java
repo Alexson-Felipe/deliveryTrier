@@ -30,6 +30,11 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
+    public List<Produto> consultar(List<UUID> ids) {
+        return produtoRepository.consultar(ids);
+    }
+
+    @Override
     public Produto cadastrar(ProdutoModel model) {
         var produto = new Produto(model.getNome(), model.getPreco(), model.getTipo());
         produtoRepository.cadastrar(produto);

@@ -2,6 +2,7 @@ package br.com.triersistemas.delivery.repository.Impl;
 
 import br.com.triersistemas.delivery.domain.Cliente;
 import br.com.triersistemas.delivery.domain.Produto;
+import br.com.triersistemas.delivery.exceptions.NaoExisteException;
 import br.com.triersistemas.delivery.repository.ClienteRepository;
 import br.com.triersistemas.delivery.repository.ProdutoRepository;
 import org.springframework.stereotype.Repository;
@@ -25,6 +26,12 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
         return LIST.stream()
                 .filter(cliente -> id.equals(cliente.getId()))
                 .findFirst();
+    }
+
+    @Override
+    public List<Produto> consultar(List<UUID> ids) {
+        return ids.stream()
+                .map(id -> this.consultar(id).orElseThrow(NaoExisteException::new)).toList();
     }
 
     @Override

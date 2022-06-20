@@ -17,10 +17,10 @@ public class Produto {
 
     private UUID id;
     private String nome;
-    private BigDecimal preco = BigDecimal.ZERO;
+    private BigDecimal preco;
     private TipoProdutoEnum tipo;
 
-   public static List<Produto> produtosCadastrado;
+    public static List<Produto> produtosCadastrado;
 
     public Produto(String nome, BigDecimal preco, TipoProdutoEnum tipo) {
         this.id = UUID.randomUUID();
@@ -29,7 +29,7 @@ public class Produto {
         this.tipo = tipo;
     }
 
-    public Produto editar(String nome, BigDecimal preco, TipoProdutoEnum tipo){
+    public Produto editar(String nome, BigDecimal preco, TipoProdutoEnum tipo) {
         this.nome = nome;
         this.preco = preco;
         this.tipo = tipo;

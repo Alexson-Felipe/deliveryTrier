@@ -1,6 +1,7 @@
 package br.com.triersistemas.delivery.controller;
 
 import br.com.triersistemas.delivery.domain.Cliente;
+import br.com.triersistemas.delivery.model.AlterarClienteModel;
 import br.com.triersistemas.delivery.model.ClienteModel;
 import br.com.triersistemas.delivery.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class ClienteController {
     }
 
     @PutMapping("/alterar/{id}")
-    public Cliente alterar(@PathVariable UUID id, @RequestBody @Valid ClienteModel model){
+    public Cliente alterar(@PathVariable UUID id, @RequestBody @Valid AlterarClienteModel model){
         return clienteService.alterar(id, model);
     }
 

@@ -1,14 +1,12 @@
 package br.com.triersistemas.delivery.model;
 
-import br.com.triersistemas.delivery.domain.Produto;
 import lombok.Getter;
 
 import java.util.List;
 import java.util.UUID;
-
 @Getter
-public class CarrinhoModel {
+public class AdicionarCarrinhoModel {
 
-    private UUID idCliente;
+    private List<UUID> idProdutos;
 
 }
