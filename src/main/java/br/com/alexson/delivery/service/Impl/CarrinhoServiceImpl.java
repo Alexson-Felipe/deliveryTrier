@@ -4,6 +4,7 @@ import br.com.alexson.delivery.domain.Carrinho;
 import br.com.alexson.delivery.exceptions.NaoExisteException;
 import br.com.alexson.delivery.model.AdicionarCarrinhoModel;
 import br.com.alexson.delivery.model.CarrinhoModel;
+import br.com.alexson.delivery.model.PagarCarrinhoModel;
 import br.com.alexson.delivery.model.RemoverProdutoCarrinhoModel;
 import br.com.alexson.delivery.repository.CarrinhoRepository;
 import br.com.alexson.delivery.service.CarrinhoService;
@@ -76,5 +77,12 @@ public class CarrinhoServiceImpl implements CarrinhoService {
         Carrinho carrinho = this.consultar(id);
         carrinhoRepository.remover(carrinho);
         return carrinho;
+    }
+
+    @Override
+    public Carrinho pagar(UUID id, PagarCarrinhoModel model) {
+        var carrinho = carrinhoRepository.consultar(id)
+                .orElseThrow(NaoExisteException::new);
+        return carrinho.pagar(id, model.getIdCupom(), model.getFormaPagamentoEnum());
     }
 }

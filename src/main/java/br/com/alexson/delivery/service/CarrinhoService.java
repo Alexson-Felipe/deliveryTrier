@@ -3,6 +3,7 @@ package br.com.alexson.delivery.service;
 import br.com.alexson.delivery.domain.Carrinho;
 import br.com.alexson.delivery.model.AdicionarCarrinhoModel;
 import br.com.alexson.delivery.model.CarrinhoModel;
+import br.com.alexson.delivery.model.PagarCarrinhoModel;
 import br.com.alexson.delivery.model.RemoverProdutoCarrinhoModel;
 
 import java.util.List;
@@ -23,5 +24,7 @@ public interface CarrinhoService {
     Carrinho removerProdutos(UUID id, RemoverProdutoCarrinhoModel model);
 
     Carrinho remover(UUID id);
+
+    Carrinho pagar(UUID id, PagarCarrinhoModel model);
 
 }

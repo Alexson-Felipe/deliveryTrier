@@ -3,6 +3,7 @@ package br.com.alexson.delivery.controller;
 import br.com.alexson.delivery.domain.Carrinho;
 import br.com.alexson.delivery.model.AdicionarCarrinhoModel;
 import br.com.alexson.delivery.model.CarrinhoModel;
+import br.com.alexson.delivery.model.PagarCarrinhoModel;
 import br.com.alexson.delivery.model.RemoverProdutoCarrinhoModel;
 import br.com.alexson.delivery.service.CarrinhoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,6 @@ public class CarrinhoController {
         return carrinhoService.removerProdutos(id, model);
     }
 
-
     @PutMapping("/alterar/{id}")
     public Carrinho alterar(@PathVariable UUID id, @RequestBody CarrinhoModel model){
         return carrinhoService.alterar(id, model);
@@ -54,4 +54,9 @@ public class CarrinhoController {
         return carrinhoService.remover(id);
     }
 
+    @PutMapping("/pagar/{id}")
+    public Carrinho pagar(@PathVariable UUID id, @RequestBody PagarCarrinhoModel model) {
+        return carrinhoService.pagar(id, model);
+    }
 }
+
