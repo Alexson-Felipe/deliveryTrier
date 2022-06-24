@@ -4,17 +4,20 @@ import lombok.Getter;
 
 import java.util.UUID;
 
+//@Entity
 @Getter
 public abstract class Pessoa {
-
+   // @Id
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
     private String nome;
     private String cpf;
     private String senha;
 
-    public Pessoa(){
+    public Pessoa() {
         this.id = UUID.randomUUID();
     }
+
     public Pessoa(String nome, String cpf, String senha) {
         this();
         this.nome = nome;
@@ -22,7 +25,7 @@ public abstract class Pessoa {
         this.senha = senha;
     }
 
-    public Pessoa editar(String nome, String senha){
+    public Pessoa editar(String nome, String senha) {
         this.nome = nome;
         this.senha = senha;
         return this;
