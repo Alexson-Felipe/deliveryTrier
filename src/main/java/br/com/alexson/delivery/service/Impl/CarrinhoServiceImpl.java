@@ -80,8 +80,9 @@ public class CarrinhoServiceImpl implements CarrinhoService {
 
     @Override
     public Carrinho pagar(UUID id, PagarCarrinhoModel model) {
-        var carrinho = carrinhoRepository.consultar(id)
-                .orElseThrow(NaoExisteException::new);
+        var carrinho = this.consultar(id);
+       // var carrinho = carrinhoRepository.consultar(id)
+        //        .orElseThrow(NaoExisteException::new);
         return carrinho.pagar(id, model.getIdCupom(), model.getFormaPagamentoEnum());
     }
 }
