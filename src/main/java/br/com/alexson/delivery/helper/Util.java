@@ -2,7 +2,9 @@ package br.com.alexson.delivery.helper;
 
 public class Util {
 
-    public String geraNomeProdutos(){
+    public String produtos(){
+
+
         /*
         produtosCadastrado =  Arrays.asList(
                 new Produto("Shampoo Clear 400ml", BigDecimal.valueOf(20.90), TipoProdutoEnum.BELEZA_PERFUMARIA),

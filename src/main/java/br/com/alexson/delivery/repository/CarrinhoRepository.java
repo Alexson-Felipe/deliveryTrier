@@ -12,8 +12,6 @@ public interface CarrinhoRepository {
 
     Optional<Carrinho> consultar(UUID id);
 
-    Optional<Carrinho> consultarProdutoCarrinho(UUID id);
-
     void cadastrar(Carrinho carrinho);
 
     void remover(Carrinho carrinho);

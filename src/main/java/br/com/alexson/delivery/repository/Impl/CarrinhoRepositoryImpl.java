@@ -27,16 +27,6 @@ public class CarrinhoRepositoryImpl implements CarrinhoRepository {
     }
 
     @Override
-    public Optional<Carrinho> consultarProdutoCarrinho(UUID id) {
-        //ARRUMAR
-        var carrinhoProduto = LIST.stream()
-                .filter(produto -> id.equals(produto.getProdutos())) // FIXME o problema está aqui
-                .findFirst();
-
-        return carrinhoProduto;
-    }
-
-    @Override
     public void cadastrar(Carrinho carrinho) {
         LIST.add(carrinho);
     }

@@ -58,9 +58,8 @@ public class CarrinhoServiceImpl implements CarrinhoService {
     public Carrinho removerProdutos(UUID id, RemoverProdutoCarrinhoModel model) {
 
         var carrinho = carrinhoRepository.consultar(id).orElseThrow(NaoExisteException::new);
-        var carrinhoProduto = carrinhoRepository.consultarProdutoCarrinho(model.getIdProduto()).orElseThrow(NaoExisteException::new);
 
-        carrinho.removerProduto(carrinhoProduto);
+        carrinho.removerProduto(id, model);
 
         return carrinho;
     }

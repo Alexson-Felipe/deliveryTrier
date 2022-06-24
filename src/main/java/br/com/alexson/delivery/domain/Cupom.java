@@ -13,10 +13,16 @@ public class Cupom {
     private BigDecimal valorEmPontos;
     private BigDecimal valorDesconto;
 
+    public Cupom(){
+
+    }
+
     public Cupom(String nome,BigDecimal valorEmPontos, BigDecimal valorDesconto) {
         this.id = UUID.randomUUID();
         this.nome = nome;
         this.valorEmPontos = valorEmPontos;
         this.valorDesconto = valorDesconto;
     }
+
+
 }

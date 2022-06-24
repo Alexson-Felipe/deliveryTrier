@@ -3,6 +3,7 @@ package br.com.alexson.delivery.domain;
 import br.com.alexson.delivery.enums.FormaPagamentoEnum;
 import br.com.alexson.delivery.enums.StatusCarrinhoEnum;
 import br.com.alexson.delivery.exceptions.NaoExisteException;
+import br.com.alexson.delivery.model.RemoverProdutoCarrinhoModel;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -24,6 +25,7 @@ public class Carrinho {
     public Carrinho(final Cliente cliente) {
         this.id = UUID.randomUUID();
         produtos = new ArrayList<>();
+        this.cupons = new ArrayList<>();
         this.cliente = cliente;
         this.status = StatusCarrinhoEnum.VAZIO;
         this.total = BigDecimal.ZERO;
@@ -41,14 +43,18 @@ public class Carrinho {
         return this;
     }
 
-    public Carrinho removerProduto(final Carrinho carrinho) {
+    public Carrinho removerProduto(final UUID id, RemoverProdutoCarrinhoModel model) {
         if (StatusCarrinhoEnum.VAZIO.equals(this.status) || StatusCarrinhoEnum.AGUARDANDO_PAGAMENTO.equals(this.status)) {
-            this.produtos.remove(carrinho);
+
+            var prod = produtos.stream().filter(p -> p.getId().equals(model.getIdProduto()))
+                    .findFirst().orElseThrow(NaoExisteException::new);
+
             this.total = this.produtos.stream()
                     .map(Produto::getPreco)
                     .reduce(this.total, BigDecimal::subtract);
+            this.produtos.remove(prod);
 
-            if(this.total.equals(0)){
+            if (total.compareTo(BigDecimal.ZERO) == 0) {
                 this.status = StatusCarrinhoEnum.VAZIO;
             }
         }
@@ -66,10 +72,10 @@ public class Carrinho {
 
             this.cliente.adicionarPontos(formaPagamentoEnum, quantidade);
 
-            if (cuponExiste.getId().equals(idCupom)){
+            if (cuponExiste.getId().equals(idCupom)) {
                 this.total = total.multiply(cuponExiste.getValorDesconto()).subtract(total);
                 cupons.remove(cuponExiste);
-            }else{
+            } else {
                 this.total = BigDecimal.ZERO;
             }
 
@@ -77,7 +83,6 @@ public class Carrinho {
         }
         return this;
     }
-
 
 
 }
