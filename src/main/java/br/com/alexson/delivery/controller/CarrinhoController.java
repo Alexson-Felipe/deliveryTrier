@@ -9,6 +9,7 @@ import br.com.alexson.delivery.service.CarrinhoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -55,7 +56,7 @@ public class CarrinhoController {
     }
 
     @PutMapping("/pagar/{id}")
-    public Carrinho pagar(@PathVariable UUID id, @RequestBody PagarCarrinhoModel model) {
+    public Carrinho pagar(@PathVariable UUID id, @RequestBody @Valid PagarCarrinhoModel model) {
         return carrinhoService.pagar(id, model);
     }
 }

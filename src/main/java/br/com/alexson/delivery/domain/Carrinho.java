@@ -17,7 +17,6 @@ public class Carrinho {
 
     private UUID id;
     private List<Produto> produtos;
-    private List<Cupom> cupons;
     private Cliente cliente;
     private StatusCarrinhoEnum status;
     private BigDecimal total;
@@ -25,7 +24,6 @@ public class Carrinho {
     public Carrinho(final Cliente cliente) {
         this.id = UUID.randomUUID();
         produtos = new ArrayList<>();
-        this.cupons = new ArrayList<>();
         this.cliente = cliente;
         this.status = StatusCarrinhoEnum.VAZIO;
         this.total = BigDecimal.ZERO;
@@ -54,6 +52,10 @@ public class Carrinho {
                     .reduce(this.total, BigDecimal::subtract);
             this.produtos.remove(prod);
 
+            this.total = this.produtos.stream()
+                    .map(Produto::getPreco)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+
             if (total.compareTo(BigDecimal.ZERO) == 0) {
                 this.status = StatusCarrinhoEnum.VAZIO;
             }
@@ -61,28 +63,26 @@ public class Carrinho {
         return this;
     }
 
-    public Carrinho pagar(final UUID id, final UUID idCupom, FormaPagamentoEnum formaPagamentoEnum) {
+    public Carrinho pagar(final UUID id, final FormaPagamentoEnum formaPagamentoEnum) {
         if (StatusCarrinhoEnum.AGUARDANDO_PAGAMENTO.equals(this.status)) {
             Integer quantidade = this.produtos.size();
 
-            var cuponExiste = cupons.stream()
-                    .filter(c -> c.getId().equals(idCupom))
-                    .findFirst().orElseThrow(NaoExisteException::new);
-
-
-            this.cliente.adicionarPontos(formaPagamentoEnum, quantidade);
-
-            if (cuponExiste.getId().equals(idCupom)) {
-                this.total = total.multiply(cuponExiste.getValorDesconto()).subtract(total);
-                cupons.remove(cuponExiste);
+            /*
+            if (cupom != null) {
+                this.total = total.multiply(cupom.getValorDesconto()).subtract(total);
             } else {
                 this.total = BigDecimal.ZERO;
             }
 
+             */
+
+            this.cliente.adicionarPontos(formaPagamentoEnum, quantidade);
             this.status = StatusCarrinhoEnum.PAGO;
+
         }
+
         return this;
+
     }
-
-
 }
+

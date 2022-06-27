@@ -1,6 +1,7 @@
 package br.com.alexson.delivery.service.Impl;
 
 import br.com.alexson.delivery.domain.Carrinho;
+import br.com.alexson.delivery.domain.Cupom;
 import br.com.alexson.delivery.exceptions.NaoExisteException;
 import br.com.alexson.delivery.model.AdicionarCarrinhoModel;
 import br.com.alexson.delivery.model.CarrinhoModel;
@@ -9,6 +10,7 @@ import br.com.alexson.delivery.model.RemoverProdutoCarrinhoModel;
 import br.com.alexson.delivery.repository.CarrinhoRepository;
 import br.com.alexson.delivery.service.CarrinhoService;
 import br.com.alexson.delivery.service.ClienteService;
+import br.com.alexson.delivery.service.CupomService;
 import br.com.alexson.delivery.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,11 @@ public class CarrinhoServiceImpl implements CarrinhoService {
     private ClienteService clienteService;
 
     @Autowired
+    private CupomService cupomService;
+
+    @Autowired
     private ProdutoService produtoService;
+
 
     @Override
     public List<Carrinho> consultar() {
@@ -80,9 +86,12 @@ public class CarrinhoServiceImpl implements CarrinhoService {
 
     @Override
     public Carrinho pagar(UUID id, PagarCarrinhoModel model) {
-        var carrinho = this.consultar(id);
-       // var carrinho = carrinhoRepository.consultar(id)
-        //        .orElseThrow(NaoExisteException::new);
-        return carrinho.pagar(id, model.getIdCupom(), model.getFormaPagamentoEnum());
+        //var carrinho = this.consultar(id);
+        var carrinho = carrinhoRepository.consultar(id)
+                .orElseThrow(NaoExisteException::new);
+
+        //var cupom = cupomService.consultar(model.getIdCupom());
+
+        return carrinho.pagar(id, model.getFormaPagamentoEnum());
     }
 }
