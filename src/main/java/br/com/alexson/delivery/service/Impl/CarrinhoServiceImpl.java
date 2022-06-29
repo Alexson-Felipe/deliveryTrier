@@ -90,7 +90,7 @@ public class CarrinhoServiceImpl implements CarrinhoService {
         var carrinho = carrinhoRepository.consultar(id)
                 .orElseThrow(NaoExisteException::new);
 
-        //var cupom = cupomService.consultar(model.getIdCupom());
+        var cupom = cupomService.consultar(model.getIdCupom());
 
         return carrinho.pagar(id, model.getFormaPagamentoEnum());
     }

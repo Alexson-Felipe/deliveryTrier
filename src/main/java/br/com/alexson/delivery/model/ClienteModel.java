@@ -13,7 +13,6 @@ public class ClienteModel {
     @NotBlank
     private String nome;
 
-    @CPF
     @NotNull
     private String cpf;
 

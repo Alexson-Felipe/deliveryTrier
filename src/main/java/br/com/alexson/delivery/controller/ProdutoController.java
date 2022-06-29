@@ -1,5 +1,6 @@
 package br.com.alexson.delivery.controller;
 
+import br.com.alexson.delivery.domain.Cliente;
 import br.com.alexson.delivery.domain.Produto;
 import br.com.alexson.delivery.model.ProdutoModel;
 import br.com.alexson.delivery.service.ProdutoService;
@@ -30,6 +31,11 @@ public class ProdutoController {
     @PutMapping("/alterar/{id}")
     public Produto alterar(@PathVariable UUID id, @RequestBody @Valid ProdutoModel model) {
         return produtoService.alterar(id, model);
+    }
+
+    @DeleteMapping("/remover/{id}")
+    public Produto remover(@PathVariable UUID id){
+        return produtoService.remover(id);
     }
 
 }
