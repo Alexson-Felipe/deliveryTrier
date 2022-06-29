@@ -47,9 +47,8 @@ public class Carrinho {
             var prod = produtos.stream().filter(p -> p.getId().equals(model.getIdProduto()))
                     .findFirst().orElseThrow(NaoExisteException::new);
 
-            this.total = this.produtos.stream()
-                    .map(Produto::getPreco)
-                    .reduce(this.total, BigDecimal::subtract);
+           var total = this.produtos.stream().map(Produto::getPreco).reduce(this.total, BigDecimal::subtract);
+
             this.produtos.remove(prod);
 
             this.total = this.produtos.stream()
