@@ -7,6 +7,7 @@ import br.com.alexson.delivery.repository.ProdutoRepository;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Util {
 
@@ -33,6 +34,27 @@ public class Util {
             this.produtoRepository.cadastrar(produto);
         }
 
+    }
+
+    public static String extractNumbers(final String documento) {
+        if (Objects.nonNull(documento)) {
+            return documento.replaceAll("\\D+", "");
+        }
+        return "";
+    }
+
+    public static List<Integer> toListInteger(final String documento) {
+        final var digitos = new ArrayList<Integer>();
+        for (char item : extractNumbers(documento).toCharArray()) {
+            digitos.add(Integer.parseInt(String.valueOf(item)));
+        }
+        return digitos;
+    }
+
+    public static String listToString(final List<Integer> digitos) {
+        return digitos.stream()
+                .map(Object::toString)
+                .reduce("", (p, e) -> p + e);
     }
 
 }

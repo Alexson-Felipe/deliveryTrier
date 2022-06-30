@@ -16,9 +16,6 @@ public class ClienteModel {
     @NotNull
     private String cpf;
 
-    @NotNull
-    @NotBlank
-    private String senha;
 
 
 }

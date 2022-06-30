@@ -30,7 +30,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente cadastrar(ClienteModel model) {
-        var cliente = new Cliente(model.getNome(), model.getCpf(), model.getSenha());
+        var cliente = new Cliente(model.getNome(), model.getCpf());
         clienteRepository.cadastrar(cliente);
         return cliente;
     }
@@ -38,7 +38,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Cliente alterar(UUID id, AlterarClienteModel model) {
         var cliente = this.consultar(id);
-        cliente.editar(model.getNome(), model.getSenha());
+        cliente.editar(model.getNome());
         return cliente;
     }
 

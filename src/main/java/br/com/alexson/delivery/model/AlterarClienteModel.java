@@ -13,8 +13,7 @@ public class AlterarClienteModel {
     private String nome;
 
     @NotNull
-    @NotBlank
-    private String senha;
+    private String cpf;
 
 
 }

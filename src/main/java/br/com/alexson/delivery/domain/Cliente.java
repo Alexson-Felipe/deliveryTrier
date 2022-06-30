@@ -14,8 +14,8 @@ public class Cliente extends Pessoa {
         this.pontos = 0;
     }
 
-    public Cliente(String nome, String cpf, String senha) {
-        super(nome, cpf, senha);
+    public Cliente(String nome, String cpf) {
+        super(nome, cpf);
         this.pontos = 0;
     }
 
