@@ -21,6 +21,9 @@ public class Produto {
 
     public static List<Produto> produtosCadastrado;
 
+    public Produto(){
+
+    }
     public Produto(String nome, BigDecimal preco, TipoProdutoEnum tipo) {
         this.id = UUID.randomUUID();
         this.nome = nome;

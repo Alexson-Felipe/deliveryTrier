@@ -1,6 +1,7 @@
 package br.com.alexson.delivery.repository.Impl;
 
 import br.com.alexson.delivery.domain.Cliente;
+import br.com.alexson.delivery.domain.Produto;
 import br.com.alexson.delivery.repository.ClienteRepository;
 import org.springframework.stereotype.Repository;
 
@@ -29,6 +30,7 @@ public class ClienteRepositoryImpl implements ClienteRepository   {
     public void cadastrar(Cliente cliente) {
         LIST.add(cliente);
     }
+
 
     @Override
     public void remover(Cliente cliente) {

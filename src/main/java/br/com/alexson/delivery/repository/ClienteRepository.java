@@ -1,6 +1,7 @@
 package br.com.alexson.delivery.repository;
 
 import br.com.alexson.delivery.domain.Cliente;
+import br.com.alexson.delivery.domain.Produto;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +14,8 @@ public interface ClienteRepository  {
     Optional<Cliente> consultar(UUID id);
 
     void cadastrar(Cliente cliente);
+
+
 
     void remover(Cliente cliente);
 

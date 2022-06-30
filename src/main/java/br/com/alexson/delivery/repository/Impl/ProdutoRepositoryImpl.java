@@ -1,10 +1,13 @@
 package br.com.alexson.delivery.repository.Impl;
 
 import br.com.alexson.delivery.domain.Produto;
+import br.com.alexson.delivery.enums.TipoProdutoEnum;
 import br.com.alexson.delivery.exceptions.NaoExisteException;
+import br.com.alexson.delivery.helper.Util;
 import br.com.alexson.delivery.repository.ProdutoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

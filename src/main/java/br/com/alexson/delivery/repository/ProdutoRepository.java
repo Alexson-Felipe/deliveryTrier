@@ -14,7 +14,6 @@ public interface ProdutoRepository {
     List<Produto> consultar(List<UUID> ids);
 
     void cadastrar(Produto produto);
-
     void remover(Produto produto);
 
 }

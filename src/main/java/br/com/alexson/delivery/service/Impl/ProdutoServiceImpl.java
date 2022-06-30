@@ -2,6 +2,7 @@ package br.com.alexson.delivery.service.Impl;
 
 import br.com.alexson.delivery.domain.Produto;
 import br.com.alexson.delivery.exceptions.NaoExisteException;
+import br.com.alexson.delivery.helper.Util;
 import br.com.alexson.delivery.model.ProdutoModel;
 import br.com.alexson.delivery.repository.ProdutoRepository;
 import br.com.alexson.delivery.service.ProdutoService;
@@ -27,6 +28,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public List<Produto> consultar(List<UUID> ids) {
+
         return produtoRepository.consultar(ids);
     }
 
