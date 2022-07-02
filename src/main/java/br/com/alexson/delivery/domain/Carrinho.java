@@ -18,6 +18,7 @@ public class Carrinho {
     private UUID id;
     private List<Produto> produtos;
     private Cliente cliente;
+    private Integer quantProdutos;
     private StatusCarrinhoEnum status;
     private BigDecimal total;
 
