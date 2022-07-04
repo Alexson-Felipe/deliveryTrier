@@ -7,6 +7,6 @@ import java.util.UUID;
 @Getter
 public class AdicionarCarrinhoModel {
 
-    private List<UUID> idProdutos;
+    private UUID idProduto;
 
 }

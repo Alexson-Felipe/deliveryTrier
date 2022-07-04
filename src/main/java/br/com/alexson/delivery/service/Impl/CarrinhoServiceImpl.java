@@ -55,7 +55,7 @@ public class CarrinhoServiceImpl implements CarrinhoService {
     @Override
     public Carrinho adicionarProdutos(UUID id, AdicionarCarrinhoModel model) {
         var carrinho = carrinhoRepository.consultar(id).orElseThrow(NaoExisteException::new);
-        var produtos = produtoService.consultar(model.getIdProdutos());
+        var produtos = produtoService.consultar(model.getIdProduto());
         carrinho.adicionarProduto(produtos);
         return carrinho;
     }

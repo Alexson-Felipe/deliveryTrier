@@ -7,7 +7,6 @@ import br.com.alexson.delivery.model.RemoverProdutoCarrinhoModel;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -25,30 +24,42 @@ public class Carrinho {
     public Carrinho(final Cliente cliente) {
         this.id = UUID.randomUUID();
         produtos = new ArrayList<>();
+        this.quantProdutos = 0;
         this.cliente = cliente;
         this.status = StatusCarrinhoEnum.VAZIO;
         this.total = BigDecimal.ZERO;
     }
 
-    public Carrinho adicionarProduto(final List<Produto> produtos) {
-        if (StatusCarrinhoEnum.VAZIO.equals(this.status) || StatusCarrinhoEnum.AGUARDANDO_PAGAMENTO.equals(this.status)) {
-            this.produtos.addAll(produtos);
+    public Carrinho adicionarProduto(final Produto produto) {
+        if (StatusCarrinhoEnum.VAZIO.equals(this.status) || StatusCarrinhoEnum.AGUARDANDO.equals(this.status)) {
+
+            if (produtos.stream().anyMatch(p -> p.getId().equals(produto.getId()))) {
+                    this.quantProdutos++;
+                        this.total = this.produtos.stream()
+                        .map(Produto::getPreco)
+                        .reduce(this.total, BigDecimal::add);
+                this.status = StatusCarrinhoEnum.AGUARDANDO;
+                return this;
+            }
+
+            this.quantProdutos++;
+            this.produtos.add(produto);
             this.total = this.produtos.stream()
                     .map(Produto::getPreco)
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
-            this.status = StatusCarrinhoEnum.AGUARDANDO_PAGAMENTO;
+            this.status = StatusCarrinhoEnum.AGUARDANDO;
         }
 
         return this;
     }
 
     public Carrinho removerProduto(final UUID id, RemoverProdutoCarrinhoModel model) {
-        if (StatusCarrinhoEnum.VAZIO.equals(this.status) || StatusCarrinhoEnum.AGUARDANDO_PAGAMENTO.equals(this.status)) {
+        if (StatusCarrinhoEnum.VAZIO.equals(this.status) || StatusCarrinhoEnum.AGUARDANDO.equals(this.status)) {
 
             var prod = produtos.stream().filter(p -> p.getId().equals(model.getIdProduto()))
                     .findFirst().orElseThrow(NaoExisteException::new);
 
-           var total = this.produtos.stream().map(Produto::getPreco).reduce(this.total, BigDecimal::subtract);
+            var total = this.produtos.stream().map(Produto::getPreco).reduce(this.total, BigDecimal::subtract);
 
             this.produtos.remove(prod);
 
@@ -64,7 +75,7 @@ public class Carrinho {
     }
 
     public Carrinho pagar(final UUID id, final FormaPagamentoEnum formaPagamentoEnum) {
-        if (StatusCarrinhoEnum.AGUARDANDO_PAGAMENTO.equals(this.status)) {
+        if (StatusCarrinhoEnum.AGUARDANDO.equals(this.status)) {
             Integer quantidade = this.produtos.size();
 
             /*
@@ -73,7 +84,6 @@ public class Carrinho {
             } else {
                 this.total = BigDecimal.ZERO;
             }
-
              */
 
             this.cliente.adicionarPontos(formaPagamentoEnum, quantidade);
@@ -85,4 +95,3 @@ public class Carrinho {
 
     }
 }
-

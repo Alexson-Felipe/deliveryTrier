@@ -4,6 +4,6 @@ public enum StatusCarrinhoEnum {
 
     VAZIO,
     PAGO,
-    AGUARDANDO_PAGAMENTO
+    AGUARDANDO
 
 }
