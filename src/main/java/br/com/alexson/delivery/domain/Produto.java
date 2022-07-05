@@ -17,6 +17,7 @@ public class Produto {
     private UUID id;
     private String nome;
     private BigDecimal preco;
+    private Integer quantProdutos;
     private TipoProdutoEnum tipo;
 
     public static List<Produto> produtosCadastrado;
@@ -29,6 +30,7 @@ public class Produto {
         this.nome = nome;
         this.preco = preco;
         this.tipo = tipo;
+        this.quantProdutos = 1;
     }
 
     public Produto editar(String nome, BigDecimal preco, TipoProdutoEnum tipo) {
@@ -38,6 +40,9 @@ public class Produto {
         return this;
     }
 
+    public void ajustarQuantidade(){
+        quantProdutos++;
+    }
     @Override
     public String toString() {
         var sB = new StringBuilder();
@@ -46,5 +51,9 @@ public class Produto {
         sB.append(" Preço: ").append(df.format(preco));
         sB.append(" Tipo: ").append(tipo.getDescricao());
         return sB.toString();
+    }
+
+    public void setQuantProdutos() {
+        this.quantProdutos++;
     }
 }

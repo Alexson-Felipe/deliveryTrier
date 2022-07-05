@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.IntStream;
 
 @Getter
 public class Carrinho {
@@ -17,14 +18,12 @@ public class Carrinho {
     private UUID id;
     private List<Produto> produtos;
     private Cliente cliente;
-    private Integer quantProdutos;
     private StatusCarrinhoEnum status;
     private BigDecimal total;
 
     public Carrinho(final Cliente cliente) {
         this.id = UUID.randomUUID();
         produtos = new ArrayList<>();
-        this.quantProdutos = 0;
         this.cliente = cliente;
         this.status = StatusCarrinhoEnum.VAZIO;
         this.total = BigDecimal.ZERO;
@@ -33,16 +32,20 @@ public class Carrinho {
     public Carrinho adicionarProduto(final Produto produto) {
         if (StatusCarrinhoEnum.VAZIO.equals(this.status) || StatusCarrinhoEnum.AGUARDANDO.equals(this.status)) {
 
-            if (produtos.stream().anyMatch(p -> p.getId().equals(produto.getId()))) {
-                    this.quantProdutos++;
-                        this.total = this.produtos.stream()
-                        .map(Produto::getPreco)
-                        .reduce(this.total, BigDecimal::add);
-                this.status = StatusCarrinhoEnum.AGUARDANDO;
-                return this;
+            for (Produto pr : produtos) {
+                if (pr.getId().equals(produto.getId())) {
+                    pr.setQuantProdutos();
+                    //this.total = this.produtos.stream()
+                    //      .map(Produto::getPreco).findFirst().orElse(BigDecimal.ZERO);
+                    //System.out.println(total);
+                    this.total = total.subtract(pr.getPreco().subtract(pr.getPreco().multiply(BigDecimal.valueOf(pr.getQuantProdutos()))));
+                    this.total = total.add(pr.getPreco().multiply(BigDecimal.valueOf(pr.getQuantProdutos())));
+                    //.reduce(0, BigDecimal::add);
+                    this.status = StatusCarrinhoEnum.AGUARDANDO;
+                    return this;
+                }
             }
 
-            this.quantProdutos++;
             this.produtos.add(produto);
             this.total = this.produtos.stream()
                     .map(Produto::getPreco)
