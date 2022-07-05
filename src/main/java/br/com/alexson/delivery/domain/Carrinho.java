@@ -35,12 +35,10 @@ public class Carrinho {
             for (Produto pr : produtos) {
                 if (pr.getId().equals(produto.getId())) {
                     pr.setQuantProdutos();
-                    //this.total = this.produtos.stream()
-                    //      .map(Produto::getPreco).findFirst().orElse(BigDecimal.ZERO);
-                    //System.out.println(total);
-                    this.total = total.subtract(pr.getPreco().subtract(pr.getPreco().multiply(BigDecimal.valueOf(pr.getQuantProdutos()))));
-                    this.total = total.add(pr.getPreco().multiply(BigDecimal.valueOf(pr.getQuantProdutos())));
-                    //.reduce(0, BigDecimal::add);
+                    this.total = this.produtos.stream()
+                            .filter(p -> p.getId().equals(produto.getId()))
+                            .map(Produto::getPreco)
+                            .reduce(this.total, BigDecimal::add);
                     this.status = StatusCarrinhoEnum.AGUARDANDO;
                     return this;
                 }
