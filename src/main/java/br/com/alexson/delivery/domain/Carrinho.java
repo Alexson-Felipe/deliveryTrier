@@ -19,11 +19,13 @@ public class Carrinho {
     private List<Produto> produtos;
     private Cliente cliente;
     private StatusCarrinhoEnum status;
+    private List<ItemCarrinho> itens;
+
     private BigDecimal total;
 
     public Carrinho(final Cliente cliente) {
         this.id = UUID.randomUUID();
-        produtos = new ArrayList<>();
+        itens = new ArrayList<>();
         this.cliente = cliente;
         this.status = StatusCarrinhoEnum.VAZIO;
         this.total = BigDecimal.ZERO;
@@ -31,7 +33,7 @@ public class Carrinho {
 
     public Carrinho adicionarProduto(final Produto produto) {
         if (StatusCarrinhoEnum.VAZIO.equals(this.status) || StatusCarrinhoEnum.AGUARDANDO.equals(this.status)) {
-
+            /*
             for (Produto pr : produtos) {
                 if (pr.getId().equals(produto.getId())) {
                     pr.setQuantProdutos();
@@ -44,11 +46,25 @@ public class Carrinho {
                 }
             }
 
+             *
+
             this.produtos.add(produto);
             this.total = this.produtos.stream()
+                    .filter(p -> p.getId().equals(produto.getId()))
                     .map(Produto::getPreco)
-                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+                    .reduce(this.total, BigDecimal::add);
             this.status = StatusCarrinhoEnum.AGUARDANDO;
+             */
+
+            var itemCarrinho = new ItemCarrinho(1, produto);
+            itens.add(itemCarrinho);
+            this.total = this.itens.stream()
+                    .filter(p -> p.getId().equals(produto.getId()))
+                //    .map(itemCarrinho.getProduto()::getPreco)
+                    .reduce(this.total, BigDecimal::add);
+            this.status = StatusCarrinhoEnum.AGUARDANDO;
+
+
         }
 
         return this;

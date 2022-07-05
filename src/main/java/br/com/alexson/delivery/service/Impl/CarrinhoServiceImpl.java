@@ -3,10 +3,7 @@ package br.com.alexson.delivery.service.Impl;
 import br.com.alexson.delivery.domain.Carrinho;
 import br.com.alexson.delivery.domain.Cupom;
 import br.com.alexson.delivery.exceptions.NaoExisteException;
-import br.com.alexson.delivery.model.AdicionarCarrinhoModel;
-import br.com.alexson.delivery.model.CarrinhoModel;
-import br.com.alexson.delivery.model.PagarCarrinhoModel;
-import br.com.alexson.delivery.model.RemoverProdutoCarrinhoModel;
+import br.com.alexson.delivery.model.*;
 import br.com.alexson.delivery.repository.CarrinhoRepository;
 import br.com.alexson.delivery.service.CarrinhoService;
 import br.com.alexson.delivery.service.ClienteService;
@@ -53,10 +50,11 @@ public class CarrinhoServiceImpl implements CarrinhoService {
     }
 
     @Override
-    public Carrinho adicionarProdutos(UUID id, AdicionarCarrinhoModel model) {
+    public Carrinho adicionarProdutos(UUID id, ItemCarrinhoModel model) {
         var carrinho = carrinhoRepository.consultar(id).orElseThrow(NaoExisteException::new);
-        var produtos = produtoService.consultar(model.getIdProduto());
-        carrinho.adicionarProduto(produtos);
+        var produto = produtoService.consultar(model.getIdProduto());
+        //carrinho.adicionarProduto(produto, model.getQtd());
+        carrinho.adicionarProduto(produto);
         return carrinho;
     }
 

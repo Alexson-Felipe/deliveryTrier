@@ -1,10 +1,7 @@
 package br.com.alexson.delivery.controller;
 
 import br.com.alexson.delivery.domain.Carrinho;
-import br.com.alexson.delivery.model.AdicionarCarrinhoModel;
-import br.com.alexson.delivery.model.CarrinhoModel;
-import br.com.alexson.delivery.model.PagarCarrinhoModel;
-import br.com.alexson.delivery.model.RemoverProdutoCarrinhoModel;
+import br.com.alexson.delivery.model.*;
 import br.com.alexson.delivery.service.CarrinhoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +33,7 @@ public class CarrinhoController {
     }
 
     @PutMapping("/adicionar-produtos/{id}")
-    public Carrinho adicionarProdutos(@PathVariable UUID id, @RequestBody AdicionarCarrinhoModel model){
+    public Carrinho adicionarProdutos(@PathVariable UUID id, @RequestBody ItemCarrinhoModel model){
         return carrinhoService.adicionarProdutos(id, model);
     }
 
