@@ -21,4 +21,8 @@ public class ItemCarrinho {
         this.valorTotal = this.produto.getPreco().multiply(BigDecimal.valueOf(qtd));
     }
 
+    public void adicionarQuantProdutos() {
+        this.qtd++;
+    }
+
 }

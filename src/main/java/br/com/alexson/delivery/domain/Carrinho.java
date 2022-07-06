@@ -33,34 +33,25 @@ public class Carrinho {
 
     public Carrinho adicionarProduto(final Produto produto) {
         if (StatusCarrinhoEnum.VAZIO.equals(this.status) || StatusCarrinhoEnum.AGUARDANDO.equals(this.status)) {
-            /*
-            for (Produto pr : produtos) {
-                if (pr.getId().equals(produto.getId())) {
-                    pr.setQuantProdutos();
-                    this.total = this.produtos.stream()
+
+            for (ItemCarrinho itemC : itens) {
+
+                if (itemC.getProduto().getId().equals(produto.getId())) {
+                    itemC.adicionarQuantProdutos();
+                    this.total = this.itens.stream()
                             .filter(p -> p.getId().equals(produto.getId()))
-                            .map(Produto::getPreco)
+                            .map(ic -> ic.getProduto().getPreco())
                             .reduce(this.total, BigDecimal::add);
                     this.status = StatusCarrinhoEnum.AGUARDANDO;
                     return this;
                 }
             }
 
-             *
-
-            this.produtos.add(produto);
-            this.total = this.produtos.stream()
-                    .filter(p -> p.getId().equals(produto.getId()))
-                    .map(Produto::getPreco)
-                    .reduce(this.total, BigDecimal::add);
-            this.status = StatusCarrinhoEnum.AGUARDANDO;
-             */
-
             var itemCarrinho = new ItemCarrinho(1, produto);
             itens.add(itemCarrinho);
             this.total = this.itens.stream()
                     .filter(p -> p.getId().equals(produto.getId()))
-                //    .map(itemCarrinho.getProduto()::getPreco)
+                    .map(ic -> ic.getProduto().getPreco())
                     .reduce(this.total, BigDecimal::add);
             this.status = StatusCarrinhoEnum.AGUARDANDO;
 

@@ -52,7 +52,5 @@ public class Produto {
         return sB.toString();
     }
 
-    public void setQuantProdutos() {
-        this.quantProdutos++;
-    }
+
 }
