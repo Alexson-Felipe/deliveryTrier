@@ -68,21 +68,16 @@ public class Carrinho {
                     .orElseThrow(NaoExisteException::new);
 
             itemCa.removeQuantProdutos();
-
-           this.total = this.itens.stream()
-                   .map(ic -> ic.getProduto().getPreco())
-                    .reduce(this.total, BigDecimal::subtract);
+            this.total = this.total.subtract(itemCa.getProduto().getPreco());
 
             if (itemCa.getQtd() == 0) {
                 this.itens.remove(itemCa);
-                this.total = this.itens.stream()
-                        .map(ic -> ic.getProduto().getPreco())
-                        .reduce(this.total, BigDecimal::subtract);
+
             }
 
-
-            if (total.compareTo(BigDecimal.ZERO) == 0) {
+            if (total.compareTo(BigDecimal.ZERO) <= 0) {
                 this.status = StatusCarrinhoEnum.VAZIO;
+                this.total = BigDecimal.ZERO;
             }
         }
         return this;
