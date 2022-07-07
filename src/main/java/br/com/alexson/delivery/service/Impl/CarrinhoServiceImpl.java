@@ -59,7 +59,7 @@ public class CarrinhoServiceImpl implements CarrinhoService {
     }
 
     @Override
-    public Carrinho removerProdutos(UUID id, RemoverProdutoCarrinhoModel model) {
+    public Carrinho removerProdutos(UUID id, ItemCarrinhoModel model) {
 
         var carrinho = carrinhoRepository.consultar(id).orElseThrow(NaoExisteException::new);
 

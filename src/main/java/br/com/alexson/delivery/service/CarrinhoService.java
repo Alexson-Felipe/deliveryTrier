@@ -18,7 +18,7 @@ public interface CarrinhoService {
 
     Carrinho alterar(UUID id, CarrinhoModel model);
 
-    Carrinho removerProdutos(UUID id, RemoverProdutoCarrinhoModel model);
+    Carrinho removerProdutos(UUID id, ItemCarrinhoModel model);
 
     Carrinho remover(UUID id);
 

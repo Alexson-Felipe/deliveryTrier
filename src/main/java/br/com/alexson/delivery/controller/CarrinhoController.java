@@ -37,8 +37,8 @@ public class CarrinhoController {
         return carrinhoService.adicionarProdutos(id, model);
     }
 
-    @PutMapping("/remover-produtos/{id}")
-    public Carrinho removerProdutos(@PathVariable UUID id, @RequestBody RemoverProdutoCarrinhoModel model){
+    @PutMapping("/remover-produto/{id}")
+    public Carrinho removerProdutos(@PathVariable UUID id, @RequestBody ItemCarrinhoModel model){
         return carrinhoService.removerProdutos(id, model);
     }
 

@@ -25,4 +25,8 @@ public class ItemCarrinho {
         this.qtd++;
     }
 
+    public void removeQuantProdutos() {
+        this.qtd--;
+    }
+
 }
