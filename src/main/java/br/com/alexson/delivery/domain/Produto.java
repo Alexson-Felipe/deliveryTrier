@@ -1,24 +1,36 @@
 package br.com.alexson.delivery.domain;
 
 import br.com.alexson.delivery.enums.TipoProdutoEnum;
+import lombok.Generated;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.UUID;
 
-
 @Getter
+@Entity
+@Table(name = "produto")
 public class Produto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     private UUID id;
+
+    @Column(name = "nome")
     private String nome;
+
+    @Column(name = "preco")
     private BigDecimal preco;
+    @Column(name = "tipo")
     private TipoProdutoEnum tipo;
 
-    public static List<Produto> produtosCadastrado;
+    //public static List<Produto> produtosCadastrado;
 
     public Produto(){
 
