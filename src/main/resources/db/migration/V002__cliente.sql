@@ -1,0 +1,7 @@
+CREATE TABLE cliente(
+    id UUID PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    cpf VARCHAR(11) UNIQUE,
+    pontos INTEGER NOT NULL DEFAULT 0
+);
+

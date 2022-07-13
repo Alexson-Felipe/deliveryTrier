@@ -54,7 +54,7 @@ public class CarrinhoServiceImpl implements CarrinhoService {
         var carrinho = carrinhoRepository.consultar(id).orElseThrow(NaoExisteException::new);
         var produto = produtoService.consultar(model.getIdProduto());
         //carrinho.adicionarProduto(produto, model.getQtd());
-        carrinho.adicionarProduto(produto);
+        //carrinho.adicionarProduto(produto);
         return carrinho;
     }
 

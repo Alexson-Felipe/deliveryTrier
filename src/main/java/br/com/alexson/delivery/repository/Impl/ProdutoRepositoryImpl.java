@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository
-public class ProdutoRepositoryImpl implements ProdutoRepository {
+public class ProdutoRepositoryImpl {
 
+    /*
     private static final List<Produto> LIST = new ArrayList<>();
 
     @Override
@@ -45,4 +45,6 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
     public void remover(Produto produto) {
         LIST.remove(produto);
     }
+
+     */
 }

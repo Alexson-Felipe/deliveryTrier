@@ -17,39 +17,52 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
     @Override
-    public List<Produto> consultar() {
-        return produtoRepository.consultar();
+    public List<ProdutoModel> consultar() {
+        return produtoRepository
+                .findAll()
+                .stream()
+                .map(ProdutoModel::new)
+                .toList();
     }
 
     @Override
-    public Produto consultar(UUID id) {
-        return produtoRepository.consultar(id).orElseThrow(NaoExisteException::new);
+    public ProdutoModel consultar(UUID id) {
+        return new ProdutoModel(this.buscarProdutoId(id));
     }
 
     @Override
-    public List<Produto> consultar(List<UUID> ids) {
+    public List<ProdutoModel> consultar(List<UUID> ids) {
 
-        return produtoRepository.consultar(ids);
+        return produtoRepository
+                .findAllById(ids)
+                .stream()
+                .map(ProdutoModel::new)
+                .toList();
     }
 
     @Override
-    public Produto cadastrar(ProdutoModel model) {
-        var produto = new Produto(model.getNome(), model.getPreco(), model.getTipo());
-        produtoRepository.cadastrar(produto);
-        return produto;
+    public ProdutoModel cadastrar(ProdutoModel model) {
+        var produto = new Produto(model);
+        return new ProdutoModel(produtoRepository.save(produto));
     }
 
     @Override
-    public Produto alterar(UUID id, ProdutoModel model) {
-        var produto = this.consultar(id);
+    public ProdutoModel alterar(ProdutoModel model) {
+        var produto = this.buscarProdutoId(model.getId());
         produto.editar(model.getNome(), model.getPreco(), model.getTipo());
-        return produto;
+        return new ProdutoModel(this.produtoRepository.save(produto));
     }
 
     @Override
-    public Produto remover(UUID id) {
-        Produto produto = this.consultar(id);
-        produtoRepository.remover(produto);
-        return produto;
+    public ProdutoModel remover(UUID id) {
+        Produto produto = this.buscarProdutoId(id);
+        produtoRepository.delete(produto);
+        return new ProdutoModel(produto);
+    }
+
+    private Produto buscarProdutoId(UUID id) {
+        return produtoRepository
+                .findById(id)
+                .orElseThrow(NaoExisteException::new);
     }
 }

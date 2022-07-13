@@ -1,22 +1,27 @@
 package br.com.alexson.delivery.model;
 
+import br.com.alexson.delivery.domain.Produto;
 import br.com.alexson.delivery.enums.TipoProdutoEnum;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-
+import java.util.UUID;
+@NoArgsConstructor
 @Getter
 public class ProdutoModel {
 
-    @NotNull
-    @NotBlank
-    private String nome;
+    private UUID id;
 
-    @NotNull
+    private String nome;
     private BigDecimal preco;
 
-    @NotNull
     private TipoProdutoEnum tipo;
+
+    public ProdutoModel(Produto produto){
+        this.id = produto.getId();
+        this.nome = produto.getNome();
+        this.preco = produto.getPreco();
+        this.tipo = produto.getTipo();
+    }
 }

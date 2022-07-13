@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Util {
 
     ProdutoRepository produtoRepository;
-
+/*
     public void cadastraProdutoAutomatico(){
 
                 Produto produtoo = new Produto();
@@ -35,6 +35,8 @@ public class Util {
         }
 
     }
+
+ */
 
     public static String extractNumbers(final String documento) {
         if (Objects.nonNull(documento)) {

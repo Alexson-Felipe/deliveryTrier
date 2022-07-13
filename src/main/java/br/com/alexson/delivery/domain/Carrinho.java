@@ -3,6 +3,7 @@ package br.com.alexson.delivery.domain;
 import br.com.alexson.delivery.enums.FormaPagamentoEnum;
 import br.com.alexson.delivery.enums.StatusCarrinhoEnum;
 import br.com.alexson.delivery.exceptions.NaoExisteException;
+import br.com.alexson.delivery.model.ClienteModel;
 import br.com.alexson.delivery.model.ItemCarrinhoModel;
 import lombok.Getter;
 
@@ -21,10 +22,10 @@ public class Carrinho {
 
     private BigDecimal total;
 
-    public Carrinho(final Cliente cliente) {
+    public Carrinho(final ClienteModel clienteModel) {
         this.id = UUID.randomUUID();
         itens = new ArrayList<>();
-        this.cliente = cliente;
+        //this.cliente = clienteModel;
         this.status = StatusCarrinhoEnum.VAZIO;
         this.total = BigDecimal.ZERO;
     }

@@ -1,6 +1,7 @@
 package br.com.alexson.delivery.domain;
 
 import br.com.alexson.delivery.enums.TipoProdutoEnum;
+import br.com.alexson.delivery.model.ProdutoModel;
 import lombok.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,32 +12,23 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.UUID;
-
+@NoArgsConstructor
 @Getter
 @Entity
 @Table(name = "produto")
 public class Produto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "nome")
     private String nome;
 
-    @Column(name = "preco")
     private BigDecimal preco;
-    @Column(name = "tipo")
+    @Enumerated(EnumType.STRING)
     private TipoProdutoEnum tipo;
 
-    //public static List<Produto> produtosCadastrado;
-
-    public Produto(){
-
-    }
     public Produto(String nome, BigDecimal preco, TipoProdutoEnum tipo) {
-        this.id = UUID.randomUUID();
         this.nome = nome;
         this.preco = preco;
         this.tipo = tipo;
@@ -49,15 +41,10 @@ public class Produto {
         return this;
     }
 
-    @Override
-    public String toString() {
-        var sB = new StringBuilder();
-        var df = new DecimalFormat("0.00");
-        sB.append("Nome: ").append(nome);
-        sB.append(" Preço: ").append(df.format(preco));
-        sB.append(" Tipo: ").append(tipo.getDescricao());
-        return sB.toString();
+    public Produto(ProdutoModel model){
+        this.nome = model.getNome();
+        this.preco = model.getPreco();
+        this.tipo = model.getTipo();
     }
-
 
 }

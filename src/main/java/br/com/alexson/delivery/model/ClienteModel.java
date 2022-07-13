@@ -1,21 +1,25 @@
 package br.com.alexson.delivery.model;
 
+import br.com.alexson.delivery.domain.Cliente;
 import lombok.Getter;
-import org.hibernate.validator.constraints.br.CPF;
+import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
+@NoArgsConstructor
 @Getter
 public class ClienteModel {
 
-    @NotNull
-    @NotBlank
+    private UUID id;
     private String nome;
-
-    @NotNull
     private String cpf;
+    private Integer pontos = 0;
 
-
+    public ClienteModel(Cliente cliente){
+        this.id = cliente.getId();
+        this.nome = cliente.getNome();
+        this.cpf = cliente.getCpf();
+        this.pontos = cliente.getPontos();
+    }
 
 }
