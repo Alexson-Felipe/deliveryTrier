@@ -13,7 +13,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/carrinho")
 public class CarrinhoController {
-
+/*
     @Autowired
     CarrinhoService carrinhoService;
 
@@ -33,7 +33,7 @@ public class CarrinhoController {
     }
 
     @PutMapping("/adicionar-produtos/{id}")
-    public CarrinhoModel adicionarProdutos(@PathVariable UUID id, @RequestBody ItemCarrinhoModel model){
+    public CarrinhoModel adicionarProdutos(@PathVariable UUID id, @RequestBody AdicionarCarrinhoModel model){
         return carrinhoService.adicionarProdutos(id, model);
     }
 
@@ -42,9 +42,11 @@ public class CarrinhoController {
         return carrinhoService.removerProdutos(id, model);
     }
 
-    @PutMapping("/alterar/{id}")
-    public CarrinhoModel alterar(@PathVariable UUID id, @RequestBody CarrinhoModel model){
-        return carrinhoService.alterar(id, model);
+
+
+    @PutMapping("/alterar")
+    public CarrinhoModel alterar(@RequestBody CarrinhoModel model){
+        return carrinhoService.alterar(model);
     }
 
     @DeleteMapping("/remover/{id}")
@@ -52,9 +54,13 @@ public class CarrinhoController {
         return carrinhoService.remover(id);
     }
 
+
+
     @PutMapping("/pagar/{id}")
     public CarrinhoModel pagar(@PathVariable UUID id, @RequestBody @Valid PagarCarrinhoModel model) {
         return carrinhoService.pagar(id, model);
     }
+
+ */
 }
 

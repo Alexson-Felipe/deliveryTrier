@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository
-public class CarrinhoRepositoryImpl implements CarrinhoRepository {
 
+public class CarrinhoRepositoryImpl {
+/*
     private static final List<Carrinho> LIST = new ArrayList<>();
 
     @Override
@@ -35,4 +35,6 @@ public class CarrinhoRepositoryImpl implements CarrinhoRepository {
     public void remover(Carrinho carrinho) {
         LIST.remove(carrinho);
     }
+
+ */
 }

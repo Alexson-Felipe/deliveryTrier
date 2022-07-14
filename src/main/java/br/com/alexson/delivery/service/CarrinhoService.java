@@ -8,20 +8,23 @@ import java.util.UUID;
 
 public interface CarrinhoService {
 
-    List<Carrinho> consultar();
+    /*
+    List<CarrinhoModel> consultar();
 
-    Carrinho consultar(UUID id);
+    CarrinhoModel consultar(UUID id);
 
-    Carrinho cadastrar(CarrinhoModel model);
+    CarrinhoModel cadastrar(CarrinhoModel model);
 
-    Carrinho adicionarProdutos(UUID id, ItemCarrinhoModel model);
+    CarrinhoModel adicionarProdutos(UUID id, AdicionarCarrinhoModel model);
 
-    Carrinho alterar(UUID id, CarrinhoModel model);
+    CarrinhoModel alterar(CarrinhoModel model);
 
-    Carrinho removerProdutos(UUID id, ItemCarrinhoModel model);
+    CarrinhoModel removerProdutos(UUID id, ItemCarrinhoModel model);
 
-    Carrinho remover(UUID id);
+    CarrinhoModel remover(UUID id);
 
-    Carrinho pagar(UUID id, PagarCarrinhoModel model);
+    CarrinhoModel pagar(UUID id, PagarCarrinhoModel model);
+
+     */
 
 }

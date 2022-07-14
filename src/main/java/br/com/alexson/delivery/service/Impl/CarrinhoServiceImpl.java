@@ -2,6 +2,7 @@ package br.com.alexson.delivery.service.Impl;
 
 import br.com.alexson.delivery.domain.Carrinho;
 import br.com.alexson.delivery.domain.Cupom;
+import br.com.alexson.delivery.domain.Produto;
 import br.com.alexson.delivery.exceptions.NaoExisteException;
 import br.com.alexson.delivery.model.*;
 import br.com.alexson.delivery.repository.CarrinhoRepository;
@@ -17,7 +18,7 @@ import java.util.UUID;
 
 @Service
 public class CarrinhoServiceImpl implements CarrinhoService {
-
+/*
     @Autowired
     private CarrinhoRepository carrinhoRepository;
 
@@ -29,67 +30,93 @@ public class CarrinhoServiceImpl implements CarrinhoService {
 
     @Autowired
     private ProdutoService produtoService;
+    @Autowired
+    private ProdutoServiceImpl produtoServiceImpl;
 
 
     @Override
-    public List<Carrinho> consultar() {
-        return carrinhoRepository.consultar();
+    public List<CarrinhoModel> consultar() {
+        //return carrinhoRepository.findAll().stream().map(CarrinhoModel::new).toList();
+        return null;
     }
 
     @Override
-    public Carrinho consultar(UUID id) {
-        return carrinhoRepository.consultar(id).orElseThrow(NaoExisteException::new);
+    public CarrinhoModel consultar(UUID id) {
+        return new CarrinhoModel(this.buscarPorId(id));
     }
 
     @Override
-    public Carrinho cadastrar(CarrinhoModel model) {
-        var cliente = clienteService.consultar(model.getIdCliente());
+    public CarrinhoModel cadastrar(CarrinhoModel model) {
+        var cliente = clienteService.consultar(model.getId());
+
         var carrinho = new Carrinho(cliente);
-        carrinhoRepository.cadastrar(carrinho);
-        return carrinho;
+
+        //return new CarrinhoModel(carrinhoRepository.save(carrinho));
+        return new CarrinhoModel(carrinhoRepository.save(carrinho));
     }
 
     @Override
-    public Carrinho adicionarProdutos(UUID id, ItemCarrinhoModel model) {
-        var carrinho = carrinhoRepository.consultar(id).orElseThrow(NaoExisteException::new);
-        var produto = produtoService.consultar(model.getIdProduto());
-        //carrinho.adicionarProduto(produto, model.getQtd());
-        //carrinho.adicionarProduto(produto);
-        return carrinho;
+    public CarrinhoModel adicionarProdutos(UUID id, AdicionarCarrinhoModel model) {
+        var carrinho = this.buscarPorId(id);
+
+        var produtos = produtoService.consultar(model.getIdProdutos());
+
+
+        return new CarrinhoModel(carrinhoRepository.save(carrinho.adicionarProduto(produtos)));
     }
 
     @Override
-    public Carrinho removerProdutos(UUID id, ItemCarrinhoModel model) {
+    public CarrinhoModel removerProdutos(UUID id, ItemCarrinhoModel model) {
 
-        var carrinho = carrinhoRepository.consultar(id).orElseThrow(NaoExisteException::new);
+        var carrinho = this.buscarPorId(id);
 
         carrinho.removerProduto(id, model);
 
-        return carrinho;
+        return new CarrinhoModel(carrinhoRepository.delete(model.));
+
+
+        return null;
     }
 
     @Override
-    public Carrinho alterar(UUID id, CarrinhoModel model) {
+    public CarrinhoModel alterar(CarrinhoModel model) {
+
         var carrinho = this.consultar(id);
         carrinhoRepository.cadastrar(carrinho);
-        return carrinho;
+
+
+        return null;
     }
 
     @Override
-    public Carrinho remover(UUID id) {
+    public CarrinhoModel remover(UUID id) {
+
         Carrinho carrinho = this.consultar(id);
         carrinhoRepository.remover(carrinho);
-        return carrinho;
+
+
+        return null;
     }
 
+
+
     @Override
-    public Carrinho pagar(UUID id, PagarCarrinhoModel model) {
-        var carrinho = this.consultar(id);
+    public CarrinhoModel pagar(UUID id, PagarCarrinhoModel model) {
+        var carrinho = this.buscarPorId(id);
         //var carrinho = carrinhoRepository.consultar(id)
                 //.orElseThrow(NaoExisteException::new);
 
         //var cupom = cupomService.consultar(model.getIdCupom());
 
-        return carrinho.pagar(id, model.getFormaPagamentoEnum());
+        carrinho.pagar(id, model.getFormaPagamentoEnum());
+        return new CarrinhoModel(carrinho);
+
     }
+
+    private Carrinho buscarPorId(UUID id) {
+        return carrinhoRepository
+                .findById(id)
+                .orElseThrow(NaoExisteException::new);
+    }
+    */
 }

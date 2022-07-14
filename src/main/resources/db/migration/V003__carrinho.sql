@@ -1,3 +1,4 @@
+/*
 CREATE TABLE carrinho(
     id UUID PRIMARY KEY,
     cliente_id UUID REFERENCES cliente(id),
@@ -10,3 +11,4 @@ CREATE TABLE carrinho_produto(
         produto_id UUID REFERENCES produto(id)
 
 )
+*/

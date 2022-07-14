@@ -1,14 +1,15 @@
 package br.com.alexson.delivery.service.Impl;
 
 import br.com.alexson.delivery.domain.Produto;
+import br.com.alexson.delivery.enums.TipoProdutoEnum;
 import br.com.alexson.delivery.exceptions.NaoExisteException;
-import br.com.alexson.delivery.helper.Util;
 import br.com.alexson.delivery.model.ProdutoModel;
 import br.com.alexson.delivery.repository.ProdutoRepository;
 import br.com.alexson.delivery.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 @Service
@@ -38,6 +39,21 @@ public class ProdutoServiceImpl implements ProdutoService {
                 .stream()
                 .map(ProdutoModel::new)
                 .toList();
+    }
+
+    @Override
+    public List<ProdutoModel> findByTipo(String tipo) {
+
+        return this.produtoRepository.findByTipo(TipoProdutoEnum.valueOf(tipo));
+    }
+
+    @Override
+    public List<ProdutoModel> buscarPeloPrecoMaiorQue(BigDecimal preco) {
+        return this.produtoRepository.buscarPeloPrecoMaiorQue(preco).stream().map(ProdutoModel::new).toList();
+    }
+
+    protected List<Produto> consultarProdutos(List<UUID> idProdutos) {
+        return produtoRepository.findAllById(idProdutos);
     }
 
     @Override

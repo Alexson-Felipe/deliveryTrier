@@ -1,5 +1,6 @@
 package br.com.alexson.delivery.domain;
 
+import br.com.alexson.delivery.model.ProdutoModel;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -10,11 +11,11 @@ public class ItemCarrinho {
 
     private UUID id;
     private Integer qtd;
-    private Produto produto;
+    private ProdutoModel produto;
 
     private BigDecimal valorTotal;
 
-    public ItemCarrinho(Integer qtd, Produto produto) {
+    public ItemCarrinho(Integer qtd, ProdutoModel produto) {
         this.id = UUID.randomUUID();
         this.qtd = qtd;
         this.produto = produto;

@@ -1,14 +1,12 @@
 package br.com.alexson.delivery.controller;
 
-import br.com.alexson.delivery.domain.Cliente;
-import br.com.alexson.delivery.domain.Produto;
-import br.com.alexson.delivery.helper.Util;
 import br.com.alexson.delivery.model.ProdutoModel;
 import br.com.alexson.delivery.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,6 +25,16 @@ public class ProdutoController {
     @GetMapping("/consultar/{id}")
     public ProdutoModel consultar(@PathVariable UUID id) {
         return produtoService.consultar(id);
+    }
+
+    @GetMapping("/consultar-por-tipo/{tipo}")
+    public List<ProdutoModel> consultarPorTipo(@PathVariable String tipo){
+        return produtoService.findByTipo(tipo);
+    }
+
+    @GetMapping("/consultar-por-preco-maior/{preco}")
+    public List<ProdutoModel> consultarPorTipo(@PathVariable BigDecimal preco){
+        return produtoService.buscarPeloPrecoMaiorQue(preco);
     }
 
     @PostMapping("/consultar")

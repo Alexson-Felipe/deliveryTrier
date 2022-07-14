@@ -5,32 +5,45 @@ import br.com.alexson.delivery.enums.StatusCarrinhoEnum;
 import br.com.alexson.delivery.exceptions.NaoExisteException;
 import br.com.alexson.delivery.model.ClienteModel;
 import br.com.alexson.delivery.model.ItemCarrinhoModel;
+import br.com.alexson.delivery.model.ProdutoModel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
+//@Entity
+//@Table(name = "carrinho")
 @Getter
+@NoArgsConstructor
 public class Carrinho {
-
+    //@Id
+   // @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+   // @ManyToOne
+   // @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente;
+   // @Enumerated(EnumType.STRING)
     private StatusCarrinhoEnum status;
+    ///@ManyToMany
+   // @JoinTable(
+     //       name = "pedido_produto",
+      //      joinColumns = @JoinColumn(name = "pedido_id", referencedColumnName = "id"),
+       //     inverseJoinColumns = @JoinColumn(name = "produto_id", referencedColumnName = "id"))
     private List<ItemCarrinho> itens;
 
     private BigDecimal total;
 
     public Carrinho(final ClienteModel clienteModel) {
-        this.id = UUID.randomUUID();
         itens = new ArrayList<>();
         //this.cliente = clienteModel;
         this.status = StatusCarrinhoEnum.VAZIO;
         this.total = BigDecimal.ZERO;
     }
 
-    public Carrinho adicionarProduto(final Produto produto) {
+    public Carrinho adicionarProduto(final ProdutoModel produto) {
         if (StatusCarrinhoEnum.VAZIO.equals(this.status) || StatusCarrinhoEnum.AGUARDANDO.equals(this.status)) {
 
             for (ItemCarrinho itemC : itens) {
