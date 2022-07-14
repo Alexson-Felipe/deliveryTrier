@@ -2,7 +2,6 @@ package br.com.alexson.delivery.service.Impl;
 
 import br.com.alexson.delivery.domain.Cliente;
 import br.com.alexson.delivery.exceptions.NaoExisteException;
-import br.com.alexson.delivery.model.AlterarClienteModel;
 import br.com.alexson.delivery.model.ClienteModel;
 import br.com.alexson.delivery.repository.ClienteRepository;
 import br.com.alexson.delivery.service.ClienteService;
@@ -30,6 +29,10 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public ClienteModel consultar(UUID id) {
         return new ClienteModel(this.buscarClienteId(id));
+    }
+
+    public List<Cliente> consultarPeloNomeCliente(String nome){
+        return this.clienteRepository.consultarPeloNome(nome);
     }
 
     @Override

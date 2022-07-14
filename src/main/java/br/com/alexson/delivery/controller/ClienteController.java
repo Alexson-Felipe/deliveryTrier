@@ -23,6 +23,11 @@ public class ClienteController {
         return clienteService.consultar();
     }
 
+    @GetMapping("/consultar-por-nome/{nome}")
+    public List<Cliente> consultar(@PathVariable String nome) {
+        return clienteService.consultarPeloNomeCliente(nome);
+    }
+
     @PostMapping("/cadastrar")
     public ClienteModel cadastrar(@RequestBody ClienteModel model) {
         return clienteService.cadastrar(model);

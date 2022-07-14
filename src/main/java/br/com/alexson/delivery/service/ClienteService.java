@@ -15,6 +15,8 @@ public interface ClienteService {
 
     ClienteModel cadastrar(ClienteModel model);
 
+    List<Cliente> consultarPeloNomeCliente(String nome);
+
     ClienteModel alterar(ClienteModel model);
 
     ClienteModel remover(UUID id);

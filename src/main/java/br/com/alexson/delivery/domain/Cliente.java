@@ -19,20 +19,6 @@ public class Cliente extends Pessoa {
     @Column(name = "pontos", insertable = false)
     private Integer pontos = 0;
 
-    /*
-    public Cliente() {
-        super();
-        this.pontos = 0;
-    }
-
-
-
-    public Cliente(String nome, String cpf) {
-        super(nome, cpf);
-        this.pontos = 0;
-    }
-
-     */
 
     public Cliente(ClienteModel model){
         super(model.getNome(), model.getCpf());
