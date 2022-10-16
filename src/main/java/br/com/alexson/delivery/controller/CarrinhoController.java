@@ -1,3 +1,4 @@
+/*
 package br.com.alexson.delivery.controller;
 
 import br.com.alexson.delivery.domain.Carrinho;
@@ -13,7 +14,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/carrinho")
 public class CarrinhoController {
-/*
+
     @Autowired
     CarrinhoService carrinhoService;
 
@@ -61,6 +62,6 @@ public class CarrinhoController {
         return carrinhoService.pagar(id, model);
     }
 
- */
-}
 
+}
+*/
